@@ -4,11 +4,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -41,7 +43,11 @@ public class Produto {
 	private BigDecimal preco;
 	
 	@NotBlank(message = "Descrição obrigatória")
-	private String descricaoPorduto;
+	private String descricaoProduto;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;
@@ -83,12 +89,12 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public String getDescricaoPorduto() {
-		return descricaoPorduto;
+	public String getDescricaoProduto() {
+		return descricaoProduto;
 	}
 
-	public void setDescricaoPorduto(String descricaoPorduto) {
-		this.descricaoPorduto = descricaoPorduto;
+	public void setDescricaoProduto(String descricaoPorduto) {
+		this.descricaoProduto = descricaoPorduto;
 	}
 	
 	
